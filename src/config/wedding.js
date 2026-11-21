@@ -14,6 +14,9 @@ const env = import.meta.env
 // URL della Web App: deve finire con /exec (senza, Google risponde 401 e il browser segnala un errore CORS).
 const endpoint = env.VITE_RSVP_ENDPOINT || ''
 export const RSVP_ENDPOINT = endpoint ? endpoint.replace(/\/(exec)?\/?$/, '') + '/exec' : ''
+if (!RSVP_ENDPOINT) {
+  console.error('VITE_RSVP_ENDPOINT non impostata: RSVP, foto e pensieri non funzioneranno. Aggiungila su Vercel e rifai il deploy.')
+}
 
 export const wedding = {
   couple: ['Lucia', 'Filippo'],
