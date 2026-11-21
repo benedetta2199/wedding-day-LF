@@ -15,7 +15,7 @@ const routes = [
     component: () => import('@/views/RsvpView.vue'),
     meta: {
       title: `RSVP — ${wedding.names}`,
-      description: `Conferma la tua presenza al matrimonio di Simone e Manuela — ${wedding.dateLong}, ${wedding.city}.`
+      description: `Conferma la tua presenza al matrimonio di ${wedding.couple.join(' e ')} — ${wedding.dateLong}, ${wedding.city}.`
     }
   },
   {
@@ -24,7 +24,7 @@ const routes = [
     component: () => import('@/views/ProgramView.vue'),
     meta: {
       title: `Programma — ${wedding.names}`,
-      description: `Orari, luoghi e informazioni utili per il matrimonio di Simone e Manuela — ${wedding.dateLong}, ${wedding.city}.`
+      description: `Orari, luoghi e informazioni utili per il matrimonio di ${wedding.couple.join(' e ')} — ${wedding.dateLong}, ${wedding.city}.`
     }
   },
   {
@@ -52,12 +52,12 @@ const router = createRouter({
   routes,
   scrollBehavior(to, from, saved) {
     if (saved) return saved
-    if (to.hash) return { el: to.hash, behavior: 'smooth' }
+    if (to.hash) return { el: to.hash, top: 90, behavior: 'smooth' }
     return { top: 0 }
   }
 })
 
-const defaultDescription = `Il matrimonio di Simone e Manuela — ${wedding.dateLong}, ${wedding.city}.`
+const defaultDescription = `Il matrimonio di ${wedding.couple.join(' e ')} — ${wedding.dateLong}, ${wedding.city}.`
 
 router.afterEach(to => {
   document.title = to.meta.title || wedding.names

@@ -13,16 +13,18 @@ const { copied, copy } = useClipboard()
       <img :src="wedding.hero.image" :alt="wedding.hero.imageAlt" fetchpriority="high">
     </div>
     <div class="container">
-      <div v-reveal class="gift-card">
-        <span class="eyebrow">04 — Regalo</span>
-        <h2>Un pensiero per noi.</h2>
-        <div class="gift-divider" aria-hidden="true"><span>♡</span></div>
+      <div v-reveal class="gift-card">        
+        <!--<h2>Un pensiero per noi.</h2>-->
         <p class="gift-message">
-          Il regalo più bello per noi sarà la vostra presenza. Per chi volesse comunque farci un pensiero,
-          desideriamo precisare che viviamo già insieme e non abbiamo bisogno di regali materiali, avendo già
-          una casa completa; una busta sarà quindi la soluzione più semplice e gradita.<strong>Grazie di cuore.</strong>
+          Il regalo più bello per noi sarà la vostra presenza. 
+          nel caso vogliate potete contribuire alla realizzazione dei nostri sogni e progetti.
+          
+          <strong>Grazie di cuore.</strong>
         </p>
-        <div class="bank">
+        
+        <div class="gift-divider" aria-hidden="true"><span>♡</span></div>
+
+                <div class="bank">
           <p class="gift-note">Per chi preferisse lasciarci un pensiero con un bonifico</p>
           <span class="bank-label">Intestatario</span>
           <div class="bank-holder">{{ gift.holder }}</div>

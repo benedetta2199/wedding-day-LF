@@ -4,11 +4,8 @@ import { useRoute } from 'vue-router'
 import { wedding } from '@/config/wedding'
 
 const links = [
-  { hash: '#storia', label: 'La nostra storia' },
-  { hash: '#cerimonia', label: 'Cerimonia' },
-  { hash: '#ricevimento', label: 'Ricevimento' },
-  { hash: '#programma', label: 'Programma' },
-  { hash: '#regalo', label: 'Regalo' }
+  { to: '/', label: 'Home' },
+  { to: '/programma', label: 'Programma' }
 ]
 
 const route = useRoute()
@@ -24,12 +21,10 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 
 watch(() => route.fullPath, () => (open.value = false))
 
-// Il router ignora i click verso l'URL corrente: in quel caso scorriamo a mano.
-function follow(hash) {
+// Il router ignora i click verso l'URL corrente: in quel caso torniamo in cima a mano.
+function follow(path) {
   open.value = false
-  if (route.path === '/' && route.hash === hash) {
-    document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' })
-  }
+  if (route.path === path) window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 </script>
 
@@ -38,20 +33,20 @@ function follow(hash) {
     <div class="nav-inner">
       <RouterLink
         class="brand"
-        :to="{ path: '/', hash: '#home' }"
+        to="/"
         aria-label="Torna all'inizio"
-        @click="follow('#home')"
+        @click="follow('/')"
       >
         <img class="site-logo" :src="wedding.logo" :alt="wedding.logoAlt">
       </RouterLink>
       <nav id="menu" class="menu" :class="{ open }">
         <RouterLink
           v-for="link in links"
-          :key="link.hash"
-          :to="{ path: '/', hash: link.hash }"
-          @click="follow(link.hash)"
+          :key="link.to"
+          :to="link.to"
+          @click="follow(link.to)"
         >{{ link.label }}</RouterLink>
-        <RouterLink class="nav-rsvp" to="/rsvp">RSVP</RouterLink>
+        <RouterLink class="nav-rsvp" to="/rsvp" @click="follow('/rsvp')">Conferma la tua presenza</RouterLink>
       </nav>
       <button
         class="hamb"

@@ -92,35 +92,33 @@ const attending = computed(() => !props.isMain || props.person.presenza === true
 
 <style scoped>
 .person {
-  border: 0;
-  padding: 0;
-  margin: 0;
   min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 .person + .person {
-  margin-top: 34px;
-  padding-top: 30px;
+  margin-top: 32px;
+  padding-top: 28px;
   border-top: 1px solid var(--line);
 }
 
 legend {
-  padding: 0 0 16px;
-  font: 600 .66rem Manrope, sans-serif;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--gold);
+  padding: 0 0 14px;
+  font-family: var(--font-title);
+  font-size: 1.375rem;
+  color: var(--oliva);
 }
 
 .attendance {
-  margin-top: 0;
-  margin-bottom: 26px;
+  margin-bottom: 22px;
 }
 
 .diet-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
 .diet-chip {
@@ -131,34 +129,33 @@ legend {
 .diet-chip input {
   position: absolute;
   inset: 0;
-  opacity: 0;
   margin: 0;
+  opacity: 0;
   cursor: pointer;
 }
 
 .diet-chip span {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border: 1px solid rgba(61, 78, 47, .2);
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--line-strong);
   border-radius: 999px;
-  background: var(--ivory);
-  font: 600 .62rem Manrope, sans-serif;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--petrol);
-  transition: background .2s, border-color .2s, color .2s;
+  background: #fff;
+  font-size: .9375rem;
+  font-weight: 500;
+  transition: background-color .2s, border-color .2s, color .2s;
 }
 
 .diet-chip:hover span {
-  border-color: var(--gold);
+  border-color: var(--oliva);
 }
 
 .diet-chip input:checked + span {
-  background: var(--petrol);
-  border-color: var(--petrol);
-  color: var(--ivory);
+  border-color: var(--oliva);
+  background: var(--oliva);
+  color: var(--carta);
 }
 
 .diet-chip input:checked + span::before {
@@ -166,22 +163,23 @@ legend {
 }
 
 .diet-chip input:focus-visible + span {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
+  outline: 2px solid var(--fede-ink);
+  outline-offset: 3px;
 }
 
 .person-remove {
-  margin-top: 14px;
+  min-height: 44px;
+  margin-top: 8px;
   padding: 0;
   border: 0;
   background: none;
-  font: 500 .85rem Manrope, sans-serif;
-  color: rgba(61, 78, 47, .7);
+  font-size: .9375rem;
+  color: var(--oliva-soft);
   text-decoration: underline;
-  cursor: pointer;
+  text-underline-offset: 3px;
 }
 
 .person-remove:hover {
-  color: var(--petrol);
+  color: var(--oliva);
 }
 </style>

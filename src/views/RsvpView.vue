@@ -4,7 +4,7 @@ import { wedding } from '@/config/wedding'
 </script>
 
 <template>
-  <main>
+  <main class="page">
     <section id="rsvp" class="rsvp rsvp-page">
       <div class="container">
         <div v-reveal class="invite">
@@ -22,8 +22,3 @@ import { wedding } from '@/config/wedding'
   </main>
 </template>
 
-<style scoped>
-.rsvp-page {
-  padding-top: 80px;
-}
-</style>

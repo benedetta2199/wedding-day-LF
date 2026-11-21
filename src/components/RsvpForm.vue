@@ -146,24 +146,23 @@ async function submit() {
 
 <style scoped>
 .add-guest {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  margin-top: 30px;
-  padding: 15px;
-  border: 1px dashed rgba(122, 112, 64, .6);
+  min-height: 52px;
+  margin-top: 28px;
+  border: 1px dashed var(--fede-ink);
   border-radius: 999px;
   background: transparent;
-  font: 600 .66rem Manrope, sans-serif;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--gold);
-  cursor: pointer;
-  transition: background .2s, border-color .2s;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--fede-ink);
+  transition: background-color .2s;
 }
 
 .add-guest:hover {
-  background: rgba(230, 232, 216, .55);
-  border-color: var(--gold);
+  background: rgba(194, 154, 98, .14);
 }
 
 .trap {
@@ -175,9 +174,9 @@ async function submit() {
 }
 
 .submit {
-  margin-top: 34px;
-  width: min(100%, 390px);
-  min-height: 62px;
+  width: 100%;
+  min-height: 56px;
+  margin-top: 28px;
 }
 
 .submit:disabled {
@@ -187,8 +186,14 @@ async function submit() {
 
 .form-error {
   min-height: 1.5em;
-  margin: 14px 0 0;
+  margin-top: 14px;
   color: #a63228;
-  font-size: 1rem;
+}
+
+@media (min-width: 600px) {
+  .submit {
+    width: auto;
+    min-width: 280px;
+  }
 }
 </style>
