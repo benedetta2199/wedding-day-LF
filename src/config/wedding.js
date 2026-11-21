@@ -7,9 +7,11 @@ import uliveto from '@/assets/img/cerimonia-interno.jpg'
 import logo from '@/assets/img/logo-sm.png'
 import logoHero from '@/assets/img/logo-lg.png'
 
-export const RSVP_ENDPOINT =
+// URL della Web App: deve finire con /exec (senza, Google risponde 401 e il browser segnala un errore CORS).
+const endpoint =
   import.meta.env.VITE_RSVP_ENDPOINT ||
   'https://script.google.com/macros/s/AKfycbyIsdBtkWArxKPA9yGmamJHFsmnuBs_Se6y00jqAMJb_zvwdCPFfkL7DJ84CMFr5Ag6/exec'
+export const RSVP_ENDPOINT = endpoint.replace(/\/(exec)?\/?$/, '') + '/exec'
 
 export const wedding = {
   couple: ['Lucia', 'Filippo'],
@@ -142,6 +144,15 @@ export const wedding = {
       { icon: 'baby', title: 'Bambini', text: 'Dettagli in arrivo.' },
       { icon: 'phone', title: 'Contatti', text: 'Dettagli in arrivo.' }
     ]
+  },
+
+  // Pagina /foto. Gli ospiti caricano le foto direttamente dal sito (finiscono nella cartella Drive).
+  // `uploadUrl` (facoltativo): link alternativo per i file troppo grandi, es. video lunghi.
+  // La galleria legge la cartella impostata in PHOTOS_FOLDER_ID nell'Apps Script.
+  photos: {
+    maxUploadMb: 30, // come MAX_MB_UPLOAD nell'Apps Script; i file più grandi vanno caricati dal link Drive
+    uploadUrl: 'https://drive.google.com/drive/folders/1awFvujR3Vbwl0KfypqKBQ7sY_6lQrRFT?usp=sharing',
+    perPage: 24 // foto mostrate prima di "Mostra altre"
   },
 
   gift: {

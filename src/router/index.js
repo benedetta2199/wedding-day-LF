@@ -28,6 +28,15 @@ const routes = [
     }
   },
   {
+    path: '/foto',
+    name: 'foto',
+    component: () => import('@/views/PhotosView.vue'),
+    meta: {
+      title: `Foto — ${wedding.names}`,
+      description: `Le foto del matrimonio di ${wedding.couple.join(' e ')}: guardale e carica le tue.`
+    }
+  },
+  {
     path: '/grazie',
     name: 'grazie',
     component: () => import('@/views/ThanksView.vue'),

@@ -5,7 +5,8 @@ import { wedding } from '@/config/wedding'
 
 const links = [
   { to: '/', label: 'Home' },
-  { to: '/programma', label: 'Programma' }
+  { to: '/programma', label: 'Programma' },
+  { to: '/foto', label: 'Foto' }
 ]
 
 const route = useRoute()
