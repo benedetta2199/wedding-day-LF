@@ -1,20 +1,20 @@
 /* =========================================================
-   Home, header e footer: design originale del sito.
+   Home e footer: design originale del sito (l'header ha uno stile
+   proprio in SiteHeader.vue).
    Regole estratte dal main.css originale nello stesso ordine
    (comprese le sovrascritture), limitate alla home con il
    prefisso .home-legacy. Colori rimappati sulla palette ulivo.
    ========================================================= */
 
-/* Dentro home, header e footer annulla gli stili globali del layer "site"
+/* Dentro home e footer annulla gli stili globali del layer "site"
    sugli elementi che il design originale stilizza a modo suo. */
-:where(.home-legacy, .nav, footer) :where(.btn, .eyebrow, .container, .reveal, h1, h2, h3, p, img, a, button, code) {
+:where(.home-legacy, footer) :where(.btn, .eyebrow, .container, .reveal, h1, h2, h3, p, img, a, button, code) {
   all: revert;
   box-sizing: border-box; /* come nel design originale */
 }
 
 /* Variabili del design originale che non fanno parte della palette */
 .home-legacy,
-.nav,
 footer {
   --line: rgba(95, 90, 62, .32);
   --curve: 42px;
@@ -29,34 +29,30 @@ footer {
       font-family: "Cormorant Garamond", serif;
       line-height: 1.55;
       overflow-x: hidden
-    }    .nav, footer {
+    }    footer {
       font-family: "Cormorant Garamond", serif;
       line-height: 1.55
     }
 
-    .home-legacy img, .nav img, footer img {
+    .home-legacy img, footer img {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover
     }
 
-    .home-legacy a, .nav a, footer a {
+    .home-legacy a, footer a {
       color: inherit;
       text-decoration: none
     }
 
     .home-legacy button,
-    .nav button,
     footer button,
     .home-legacy input,
-    .nav input,
     footer input,
     .home-legacy select,
-    .nav select,
     footer select,
     .home-legacy textarea,
-    .nav textarea,
     footer textarea {
       font: inherit
     }
@@ -71,88 +67,6 @@ footer {
       letter-spacing: .28em;
       text-transform: uppercase;
       color: var(--gold)
-    }
-
-    .nav {
-      height: 80px;
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 50;
-      background: rgba(246, 241, 231, .94);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(12px);
-      transition: .3s
-    }
-
-    .nav.compact {
-      height: 66px;
-      box-shadow: 0 12px 38px rgba(46, 50, 34, .07)
-    }
-
-    .nav-inner {
-      height: 100%;
-      padding: 0 38px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between
-    }
-
-    .brand {
-      font-size: 2.35rem;
-      line-height: 1;
-      color: var(--gold);
-      letter-spacing: -.08em
-    }
-
-    .brand span {
-      display: inline-block;
-      margin-left: -.08em
-    }
-
-    .menu {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      font: 600 .66rem Manrope, sans-serif;
-      letter-spacing: .23em;
-      text-transform: uppercase
-    }
-
-    .menu a {
-      position: relative;
-      padding: 9px 0
-    }
-
-    .menu a:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 100%;
-      bottom: 2px;
-      height: 1px;
-      background: var(--gold);
-      transition: right .25s
-    }
-
-    .menu a:hover:after {
-      right: 0
-    }
-
-    .menu .nav-rsvp {
-      border: 1px solid var(--gold);
-      padding: 11px 18px
-    }
-
-    .menu .nav-rsvp:after {
-      display: none
-    }
-
-    .hamb {
-      display: none;
-      border: 0;
-      background: none;
-      color: var(--petrol);
-      font-size: 1.7rem
     }
 
     .home-legacy .hero {
@@ -214,7 +128,7 @@ footer {
       font: 500 clamp(1rem, 1.6vw, 1.35rem) Manrope, sans-serif;
       letter-spacing: .42em;
       color: var(--gold);
-      margin-bottom: 46px;
+      margin-bottom: min(3vw, 3vh);
     }
 
     .home-legacy .hero-actions {
@@ -452,9 +366,6 @@ footer {
     }
 
     @media(max-width:1000px) {
-      .menu {
-        gap: 22px
-      }
 
       .home-legacy .hero {
         grid-template-columns: 1fr;
@@ -477,29 +388,6 @@ footer {
     @media(max-width:720px) {
       .home-legacy .container {
         width: min(100% - 34px, 1240px)
-      }
-
-      .nav-inner {
-        padding: 0 18px
-      }
-
-      .menu {
-        position: fixed;
-        top: 66px;
-        left: 0;
-        right: 0;
-        display: none;
-        flex-direction: column;
-        background: var(--ivory);
-        padding: 34px
-      }
-
-      .menu.open {
-        display: flex
-      }
-
-      .hamb {
-        display: block
       }
 
       .home-legacy .hero-copy {
@@ -788,8 +676,7 @@ footer {
 
     /* Linee morbide e schede gemelle */
     .home-legacy .btn,
-    .home-legacy .copy,
-    .menu .nav-rsvp {
+    .home-legacy .copy {
       border-radius: 999px
     }
 
@@ -907,18 +794,6 @@ footer {
       }
     }
 
-    .nav-inner {
-      position: relative
-    }
-
-    .menu {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      justify-content: center;
-      white-space: nowrap
-    }
-
     .home-legacy .venue-mini {
       justify-content: center;
       text-align: center
@@ -926,16 +801,6 @@ footer {
 
     .home-legacy .venue-mini>span:last-child {
       display: block
-    }
-
-    @media(max-width:720px) {
-      .menu {
-        position: fixed;
-        left: 0;
-        right: 0;
-        transform: none;
-        white-space: normal
-      }
     }
 
     .home-legacy .hero,
@@ -993,27 +858,6 @@ footer {
       }
     }
 
-    .nav-inner {
-      display: grid;
-      grid-template-columns: 80px minmax(0, 1fr) 80px
-    }
-
-    .brand {
-      justify-self: start
-    }
-
-    .menu {
-      position: static;
-      left: auto;
-      transform: none;
-      justify-self: center;
-      justify-content: center
-    }
-
-    .hamb {
-      justify-self: end
-    }
-
     .home-legacy .hero .venue-strip {
       display: grid;
       position: absolute;
@@ -1047,18 +891,6 @@ footer {
     }
 
     @media(max-width:720px) {
-      .nav-inner {
-        grid-template-columns: 54px minmax(0, 1fr) 54px
-      }
-
-      .menu {
-        position: fixed;
-        top: 66px;
-        left: 0;
-        right: 0;
-        transform: none;
-        justify-self: stretch
-      }
 
       .home-legacy .hero .venue-strip {
         left: 50%;
@@ -1214,19 +1046,6 @@ footer {
       }
     }
 
-    .brand {
-      width: 58px;
-      height: 58px;
-      overflow: hidden;
-      border-radius: 50%;
-      background: var(--ivory);
-      letter-spacing: 0
-    }
-
-    .brand .site-logo {
-      transform: scale(1.1)
-    }
-
     /* Foto proposta: formato verticale originale, sempre interamente visibile */
 
     .home-legacy .hero-monogram {
@@ -1258,10 +1077,6 @@ footer {
     }
 
     @media(max-width:720px) {
-      .brand {
-        width: 50px;
-        height: 50px
-      }
 
       .footer-mark {
         width: 128px;
@@ -1308,7 +1123,8 @@ footer {
 
     /* Hero: frase d'invito sopra il logo */
     .home-legacy .hero-invite {
-      margin: 0 0 18px;
+      width:75%;
+      margin: min(3vw, 3vh) auto 18px;
       font-size: clamp(1.35rem, 2.4vw, 1.9rem);
       font-family: Allura, cursive;
       font-style: normal;
@@ -1411,7 +1227,8 @@ footer {
   font-weight: 400;
   font-style: normal;
   letter-spacing: 0;
-  font-size-adjust: .42;
+  line-height: 1.5;
+  font-size-adjust: .6;
 }
 
 .home-legacy .hero-invite {
@@ -1425,38 +1242,123 @@ footer {
 /* Arco dietro data e conferma: verde salvia che sfuma nel tramonto */
 .home-legacy .hero-copy:after {
   background: linear-gradient(180deg, rgba(196, 202, 165, .85) 0%, rgba(232, 214, 182, .7) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(180, 180, 142, .85) 0%,
+    rgba(227, 229, 205, .7) 100%
+  );
 }
 
-/* Striscia dei luoghi: banda verde ulivo */
+/* Striscia dei luoghi: chiara, con un piccolo arco sopra ogni luogo */
 .home-legacy .venue-strip {
-  border-color: var(--petrol);
-  background: var(--petrol);
-  color: var(--ivory);
-  box-shadow: 0 24px 60px -30px rgba(46, 50, 34, .55);
+  border: 1px solid rgba(107, 113, 72, .3);
+  background: linear-gradient(180deg, var(--carta) 0%, #f1ecdf 100%);
+  color: var(--petrol);
+  box-shadow: 0 30px 70px -44px rgba(46, 50, 34, .5);
+}
+
+.home-legacy .venue-mini {
+  min-height: 0;
+  padding: 30px 24px 26px;
+  transition: background-color .25s;
+}
+
+.home-legacy .venue-mini > span:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Finestra ad arco in miniatura con un tramonto dentro e, controluce,
+   il luogo: la chiesa per la cerimonia, l'agriturismo per il ricevimento.
+   Al passaggio il sole scende dietro le colline. */
+.home-legacy .venue-mini > span:last-child:before {
+  content: "";
+  width: 40px;
+  height: 48px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(107, 113, 72, .55);
+  border-radius: 20px 20px 4px 4px;
+  background-image:
+    var(--venue-art, none),
+    /* colline */
+    radial-gradient(75% 30% at 22% 100%, #8f9468 0 97%, transparent 100%),
+    radial-gradient(85% 24% at 88% 100%, #6b7148 0 97%, transparent 100%),
+    /* sole */
+    radial-gradient(circle, #f6dcb0 0 4px, rgba(246, 220, 176, .55) 5px, transparent 9px),
+    /* cielo */
+    linear-gradient(180deg, #e9dcc3 0%, #ebc9a0 60%, #e2b88a 100%);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 20px 20px, 100% 100%;
+  background-position: 0 0, 0 0, 0 0, var(--sun-x, 50%) var(--sun-y, 34%), 0 0;
+  background-repeat: no-repeat;
+  box-shadow: inset 0 0 0 3px var(--carta), 0 6px 14px -8px rgba(46, 50, 34, .5);
+  transition: background-position .7s var(--ease);
+}
+
+.home-legacy .venue-mini:hover > span:last-child:before {
+  --sun-y: 96%;
+}
+
+/* Cerimonia: il santuario, sole a destra */
+.home-legacy .venue-cerimonia {
+  --venue-art: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 48'%3E%3Cg fill='%234a5232'%3E%3Cpath d='M12.5 46V26h15v20z'/%3E%3Cpath d='M11 26.5Q20 13.5 29 26.5z'/%3E%3Crect x='19.4' y='8.5' width='1.2' height='7.5'/%3E%3Crect x='17.4' y='10.6' width='5.2' height='1.2'/%3E%3Crect x='10' y='26' width='20' height='1.4'/%3E%3C/g%3E%3Cg fill='%23f3d3a2'%3E%3Cpath d='M17.8 46v-6.2a2.2 2.2 0 0 1 4.4 0V46z'/%3E%3Cpath d='M19.2 31.2a.8.8 0 0 1 1.6 0v3h-1.6z'/%3E%3C/g%3E%3C/svg%3E");
+  --sun-x: 82%;
+}
+
+/* Ricevimento: l'agriturismo con il cipresso, sole a sinistra */
+.home-legacy .venue-ricevimento {
+  --venue-art: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 48'%3E%3Cg fill='%234a5232'%3E%3Cpath d='M6 46V31.5h21V46z'/%3E%3Cpath d='M4.2 32.2 16.5 23.5l12.3 8.7z'/%3E%3Crect x='21.5' y='24.5' width='2.6' height='5'/%3E%3Cellipse cx='33.2' cy='36.5' rx='2.6' ry='9'/%3E%3Crect x='32.7' y='45' width='1' height='1.5'/%3E%3C/g%3E%3Cg fill='%23f3d3a2'%3E%3Crect x='9' y='34.5' width='3' height='3'/%3E%3Crect x='21' y='34.5' width='3' height='3'/%3E%3Cpath d='M15 46v-5.4a1.5 1.5 0 0 1 3 0V46z'/%3E%3C/g%3E%3C/svg%3E");
+  --sun-x: 16%;
 }
 
 .home-legacy .venue-mini small {
-  color: var(--tramonto);
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  color: var(--erba);
 }
 
-.home-legacy .venue-mini + .venue-mini,
-.home-legacy .venue-more {
-  border-color: rgba(246, 241, 231, .2);
+.home-legacy .venue-mini strong {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--petrol);
+}
+
+.home-legacy .venue-mini + .venue-mini {
+  border-color: rgba(107, 113, 72, .22);
 }
 
 .home-legacy .venue-mini:hover {
-  background: rgba(246, 241, 231, .07);
+  background: rgba(227, 229, 205, .55);
+}
+
+.home-legacy .venue-more {
+  padding: 20px 24px 24px;
+  border-color: rgba(107, 113, 72, .22);
+  background: rgba(227, 229, 205, .45);
 }
 
 .home-legacy .venue-more .btn {
-  border-color: rgba(246, 241, 231, .7);
-  color: var(--ivory);
+  border-color: var(--erba);
+  color: var(--petrol);
 }
 
 .home-legacy .venue-more .btn:hover {
-  border-color: var(--tramonto);
-  background: var(--tramonto);
-  color: var(--deep);
+  border-color: var(--petrol);
+  background: var(--petrol);
+  color: var(--ivory);
+}
+
+@media (max-width: 720px) {
+  .home-legacy .venue-mini {
+    padding: 24px 18px 22px;
+  }
+
+  .home-legacy .venue-mini strong {
+    font-size: 1.3rem;
+  }
 }
 
 /* Regalo: sfondo che vira al verde, dettagli verdi */

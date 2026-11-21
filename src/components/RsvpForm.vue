@@ -2,7 +2,8 @@
 import { reactive, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import PersonFields from './PersonFields.vue'
-import { RSVP_ENDPOINT } from '@/config/wedding'
+import AppIcon from './AppIcon.vue'
+import { RSVP_ENDPOINT, wedding } from '@/config/wedding'
 
 const MAX_PEOPLE = 10 // principale + invitati aggiunti (deve coincidere con MAX_PERSONE nello script)
 
@@ -105,6 +106,10 @@ async function submit() {
   <form class="rsvp-form" @submit.prevent="submit">
     <span class="eyebrow">RSVP</span>
     <h2>Sarete con noi?</h2>
+    <p class="rsvp-deadline">
+      <AppIcon name="calendar" :size="20" />
+      <span>Vi chiediamo di confermare entro <strong>{{ wedding.rsvpDeadline }}</strong>.</span>
+    </p>
     <p class="rsvp-intro">
       Una sola risposta per nucleo familiare: inserisci i tuoi dati e aggiungi le persone che verranno con te.
     </p>
@@ -145,6 +150,29 @@ async function submit() {
 </template>
 
 <style scoped>
+/* Scadenza della conferma: ben visibile, subito sotto il titolo */
+.rsvp-deadline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 12px 16px;
+  border: 1px solid rgba(107, 113, 72, .3);
+  border-radius: 16px;
+  background: var(--verde-chiaro);
+  line-height: 1.45;
+}
+
+.rsvp-deadline svg {
+  flex-shrink: 0;
+  color: var(--erba);
+}
+
+.rsvp-deadline strong {
+  font-weight: 600;
+  color: var(--bosco);
+}
+
 .add-guest {
   display: flex;
   align-items: center;

@@ -38,6 +38,7 @@ const pad = n => String(n).padStart(2, '0')
         v-for="(place, i) in wedding.places"
         :key="place.id"
         class="venue-mini"
+        :class="`venue-${place.id}`"
         :to="{ path: '/programma', hash: '#' + place.id }"
       >
         <span class="venue-no">{{ pad(i + 1) }}</span>

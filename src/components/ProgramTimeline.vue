@@ -9,7 +9,9 @@ const events = wedding.program.events.map(event => {
   return {
     ...event,
     photo: event.photo || place?.gallery?.[0],
-    hasSection: Boolean(place)
+    hasSection: Boolean(place),
+    // il link nomina i parcheggi solo se la sezione del luogo li contiene
+    linkLabel: place?.parking?.length ? 'Dettagli e parcheggi' : 'Dettagli e indicazioni'
   }
 })
 </script>
@@ -36,7 +38,7 @@ const events = wedding.program.events.map(event => {
         <p v-if="event.place" class="moment-place">{{ event.place }}</p>
         <p v-if="event.note" class="moment-note">{{ event.note }}</p>
         <a v-if="event.hasSection" class="moment-link" :href="`#${event.placeId}`">
-          Dettagli e parcheggi<AppIcon name="chevron" :size="16" />
+          {{ event.linkLabel }}<AppIcon name="chevron" :size="16" />
         </a>
       </div>
     </li>
@@ -44,7 +46,9 @@ const events = wedding.program.events.map(event => {
 </template>
 
 <style scoped>
-/* ---------- Mobile: righe compatte, miniatura ad arco a sinistra ---------- */
+/* ---------- Mobile: righe compatte, miniatura ad arco alternata ----------
+   1° momento: foto a sinistra, testo a destra.
+   2° momento (flip): foto a destra, testo allineato a destra accanto alla foto. */
 .timeline {
   list-style: none;
   max-width: 1000px;
@@ -55,6 +59,7 @@ const events = wedding.program.events.map(event => {
 .moment {
   display: grid;
   grid-template-columns: 96px 1fr;
+  grid-template-areas: "photo card";
   align-items: center;
   gap: 18px;
   padding: 18px 0;
@@ -65,13 +70,28 @@ const events = wedding.program.events.map(event => {
   border-bottom: 1px solid var(--line);
 }
 
+.moment.flip {
+  grid-template-columns: 1fr 96px;
+  grid-template-areas: "card photo";
+}
+
 .moment-photo {
+  grid-area: photo;
   margin: 0;
   aspect-ratio: 4 / 5;
 }
 
 .moment-card {
+  grid-area: card;
   min-width: 0;
+}
+
+.moment.flip .moment-card {
+  text-align: right;
+}
+
+.moment.flip .moment-time {
+  justify-content: flex-end;
 }
 
 .moment-time {
@@ -147,30 +167,19 @@ const events = wedding.program.events.map(event => {
     border: 0;
   }
 
-  .moment.flip {
+  /* stessa specificità di .moment:last-child: va ripetuta per non perdere l'inversione */
+  .moment.flip,
+  .moment.flip:last-child {
     grid-template-areas: "card photo";
   }
 
   .moment-photo {
-    grid-area: photo;
     justify-self: end;
     width: 300px;
   }
 
   .moment.flip .moment-photo {
     justify-self: start;
-  }
-
-  .moment-card {
-    grid-area: card;
-  }
-
-  .moment.flip .moment-card {
-    text-align: right;
-  }
-
-  .moment.flip .moment-time {
-    justify-content: flex-end;
   }
 
   .moment-time .num {

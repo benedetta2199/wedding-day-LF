@@ -16,6 +16,7 @@ export const wedding = {
   names: 'Lucia & Filippo',
   dateShort: '24 · 04 · 2027',
   dateLong: '24 aprile 2027',
+  rsvpDeadline: 'mercoledì 24 marzo 2027', // il 24 marzo 2027 è mercoledì
   city: 'Longiano',
   logo,
   logoAlt: 'Logo Lucia e Filippo',
@@ -45,65 +46,63 @@ export const wedding = {
     {
       id: 'cerimonia',
       label: 'Cerimonia',
-      time: '12:00',
-      stripName: 'Chiesa di San Giuseppe · Longiano',
-      title: ['Chiesa di', 'San Giuseppe'],
-      text: 'In un luogo raccolto e luminoso ci scambieremo le nostre promesse, circondati dalle persone che hanno accompagnato la nostra storia.',
+      time: '11:00',
+      stripName: 'Santuario del SS. Crocifisso · Longiano',
+      title: ['Santuario del', 'SS. Crocifisso'],
+      text: '',
       facts: [
-        ['Quando', '24 aprile 2027 · ore 12:00'],
-        ['Dove', 'Piazza Malatestiana · Longiano'],
-        ['Ritrovo', 'Dalle ore 11:40'],
+        ['Quando', '24 aprile 2027 · ore 11:00'],
+        ['Dove', 'Via Decio Raggi 2, 47020 Longiano (FC)'],
+        ['Ritrovo', 'Dalle ore 10:45'],
         ['Durata', 'Circa un’ora']
       ],
-      map: 'https://www.google.com/maps/search/?api=1&query=Chiesa+di+San+Giuseppe+Longiano',
+      map: 'https://maps.app.goo.gl/X3K7FC6kb2vHWnWJ7',
       reverse: false,
       gallery: [
-        { src: santuario, alt: 'La facciata della chiesa di Longiano al tramonto' }
+        { src: santuario, alt: 'Il Santuario del SS. Crocifisso di Longiano al tramonto' }
       ],
-      // Parcheggi vicino alla chiesa (pagina /programma). DA VERIFICARE: nomi, note e link sono indicativi.
+      // Parcheggi vicino al santuario (pagina /programma).
       parking: [
         {
-          name: 'Parcheggio del centro storico',
+          name: 'Parcheggio del Santuario',
+          note: 'Dietro la chiesa, accesso da via Decio Raggi',
+          map: 'https://maps.app.goo.gl/zzT32QxzvhbVh4qf8'
+        },
+        {
+          name: 'Parcheggio XI Ottobre ',
           note: 'A pochi passi dalla chiesa · posti limitati, consigliamo di arrivare presto',
-          map: 'https://www.google.com/maps/search/?api=1&query=parcheggio+centro+storico+Longiano'
+          map: 'https://maps.app.goo.gl/jNVhYGiQMADTR73J8'
         },
         {
           name: 'Parcheggio Teatro Petrella',
           note: 'Circa 5 minuti a piedi dalla chiesa',
-          map: 'https://www.google.com/maps/search/?api=1&query=parcheggio+Teatro+Petrella+Longiano'
-        },
-        {
-          name: 'Parcheggio Castello Malatestiano',
-          note: 'Circa 5 minuti a piedi · ampio e gratuito',
-          map: 'https://www.google.com/maps/search/?api=1&query=parcheggio+Castello+Malatestiano+Longiano'
+          map: 'https://maps.app.goo.gl/4BzfFtZMqdDiWDdc6'
         }
       ]
     },
     {
       id: 'ricevimento',
       label: 'Ricevimento',
-      time: '14:00',
-      stripName: 'L’Antico Casale · Longiano',
-      title: ['L’Antico', 'Casale'],
-      text: 'Tra il verde della campagna romagnola ci aspettano un brindisi, una cena da assaporare e una festa da ricordare senza guardare l’orologio.',
+      time: '13:00',
+      stripName: 'Agriturismo 4 Colli · Sorrivoli',
+      title: ['Agriturismo', '4 Colli'],
+      text: '',
       facts: [
-        ['Quando', 'Dalle ore 14:00'],
-        ['Dove', 'Località 4 Colli · Longiano'],
+        ['Quando', 'Dalle ore 13:00'],
+        ['Dove', 'Via Provinciale Monteleone 6851, 47020 Sorrivoli (FC)'],
         ['Aperitivo', 'In giardino all’arrivo degli ospiti'],
         ['Servizi', 'Parcheggio interno']
       ],
-      map: 'https://www.google.com/maps/search/?api=1&query=Ristorante+4+Colli+Longiano',
+      map: 'https://maps.app.goo.gl/ByXE6r4MnURM1kR96',
       reverse: true,
       gallery: [
-        { src: agriturismo, alt: 'Il viale d’ingresso del casale tra le colline al tramonto' }
+        { src: agriturismo, alt: 'Il viale d’ingresso dell’Agriturismo 4 Colli al tramonto' }
       ],
-      parking: [
-        {
-          name: 'Parcheggio interno',
-          note: 'Gratuito e riservato agli ospiti, all’interno della struttura',
-          map: 'https://www.google.com/maps/search/?api=1&query=Ristorante+4+Colli+Longiano'
-        }
-      ]
+      // Al posto dei parcheggi, nella pagina /programma
+      directions: {
+        title: 'Come arrivare',
+        text: 'L’agriturismo è a Sorrivoli a circa 15 minuti in auto dalla chiesa.'
+      }
     }
   ],
 
@@ -115,28 +114,28 @@ export const wedding = {
     events: [
       {
         id: 'cerimonia',
-        time: '12:00',
+        time: '11:00',
         icon: 'church',
         title: 'Cerimonia religiosa',
         placeId: 'cerimonia',
-        place: 'Chiesa di San Giuseppe',
-        address: 'Piazza Malatestiana · Longiano (FC)',
-        note: 'Ritrovo dalle ore 11:40',
+        place: 'Santuario del SS. Crocifisso',
+        address: 'Via Decio Raggi 2 · Longiano (FC)',
+        note: 'Ritrovo dalle ore 10:45',
       },
       {
         id: 'ricevimento',
-        time: '14:00',
+        time: '13:00',
         icon: 'wine',
         title: 'Ricevimento',
         placeId: 'ricevimento',
-        place: 'L’Antico Casale',
-        address: 'Località 4 Colli · Longiano (FC)',
-        note: 'Parcheggio interno',
+        place: 'Agriturismo 4 Colli',
+        address: 'Via Provinciale Monteleone 6851 · Sorrivoli (FC)',
+        note: 'A 15 minuti in auto dal santuario',
       }
     ],
     // Informazioni pratiche della pagina estesa. Sostituire i testi "Dettagli in arrivo".
     practical: [
-      { icon: 'car', title: 'Come arrivare', text: 'La chiesa e il ricevimento sono entrambi a Longiano: tra i due luoghi ci vogliono pochi minuti in auto.' },
+      { icon: 'car', title: 'Come arrivare', text: 'Il santuario è a Longiano e l’agriturismo a Sorrivoli: tra i due luoghi ci vogliono circa 15 minuti in auto.' },
       { icon: 'parking', title: 'Parcheggio', text: 'Il ricevimento dispone di un parcheggio interno. Per la cerimonia trovate i parcheggi consigliati qui sopra.' },
       { icon: 'shirt', title: 'Dress code', text: 'Dettagli in arrivo.' },
       { icon: 'bed', title: 'Dove dormire', text: 'Dettagli in arrivo.' },
