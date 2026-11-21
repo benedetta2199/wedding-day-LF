@@ -11,19 +11,42 @@ export async function callScript(payload) {
   return response.json()
 }
 
-// Galleria: [{ id, t (data in ms), v (true se video) }], dalla più recente.
-export async function fetchPhotos() {
-  const result = await callScript({ action: 'photos' })
+// Galleria, dal più recente:
+//   photos   [{ id, t (data in ms), v (true se video) }]
+//   messages [{ id, t, nome, testo }]
+//   total    numero complessivo delle foto (la pagina ne contiene al massimo `limit`)
+export async function fetchGallery({ offset = 0, limit } = {}) {
+  const result = await callScript({ action: 'photos', offset, limit })
   if (!result.ok) throw new Error(result.error || 'unknown')
-  return result.photos
+  const photos = result.photos || []
+  // uno script vecchio, senza paginazione, restituisce tutto e niente `total`
+  return { photos, total: result.total ?? offset + photos.length, messages: result.messages || [] }
+}
+
+// Pensiero agli sposi: restituisce il messaggio salvato.
+export async function sendMessage(nome, testo) {
+  const result = await callScript({ action: 'message', nome, testo })
+  if (!result.ok) throw new Error(result.error || 'unknown')
+  return result.message
 }
 
 // Caricamento di un file nella cartella Drive (tramite Apps Script).
-export async function uploadPhoto(file, ospite) {
+// `pensiero` (facoltativo): dedica breve, mostrata sotto la foto come in una polaroid.
+// `scattata` (facoltativo): data ISO dello scatto, quando la compressione ha tolto gli EXIF.
+// Restituisce { id, message } (message = il pensiero salvato, oppure null).
+export async function uploadPhoto(file, ospite, pensiero = '', scattata = null) {
   const dati = await toBase64(file)
-  const result = await callScript({ action: 'upload', nome: file.name, mime: file.type, ospite, dati })
+  const result = await callScript({
+    action: 'upload',
+    nome: file.name,
+    mime: file.type,
+    ospite,
+    pensiero,
+    scattata: scattata || '',
+    dati
+  })
   if (!result.ok) throw new Error(result.error || 'unknown')
-  return result.id
+  return { id: result.id, message: result.message || null }
 }
 
 function toBase64(file) {

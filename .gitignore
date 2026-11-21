@@ -1,5 +1,17 @@
 node_modules
 dist
+.vercel
+
+# Variabili d'ambiente (contengono URL e dati privati)
+.env
 .env.local
 .env.*.local
-.vercel
+
+# Codice e dati Google (ID di fogli e cartelle) e documenti di prova
+google/
+docs/
+
+# Claude Code: impostazioni locali e cache Python
+.claude/settings.local.json
+__pycache__/
+*.pyc

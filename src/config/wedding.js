@@ -7,11 +7,13 @@ import uliveto from '@/assets/img/cerimonia-interno.jpg'
 import logo from '@/assets/img/logo-sm.png'
 import logoHero from '@/assets/img/logo-lg.png'
 
+// Dati privati (URL dell'Apps Script, link Drive, IBAN): stanno nelle variabili d'ambiente,
+// non nel codice. In locale: .env.local (vedi .env.example); in produzione: Settings → Environment Variables su Vercel.
+const env = import.meta.env
+
 // URL della Web App: deve finire con /exec (senza, Google risponde 401 e il browser segnala un errore CORS).
-const endpoint =
-  import.meta.env.VITE_RSVP_ENDPOINT ||
-  'https://script.google.com/macros/s/AKfycbyIsdBtkWArxKPA9yGmamJHFsmnuBs_Se6y00jqAMJb_zvwdCPFfkL7DJ84CMFr5Ag6/exec'
-export const RSVP_ENDPOINT = endpoint.replace(/\/(exec)?\/?$/, '') + '/exec'
+const endpoint = env.VITE_RSVP_ENDPOINT || ''
+export const RSVP_ENDPOINT = endpoint ? endpoint.replace(/\/(exec)?\/?$/, '') + '/exec' : ''
 
 export const wedding = {
   couple: ['Lucia', 'Filippo'],
@@ -151,12 +153,27 @@ export const wedding = {
   // La galleria legge la cartella impostata in PHOTOS_FOLDER_ID nell'Apps Script.
   photos: {
     maxUploadMb: 30, // come MAX_MB_UPLOAD nell'Apps Script; i file più grandi vanno caricati dal link Drive
-    uploadUrl: 'https://drive.google.com/drive/folders/1awFvujR3Vbwl0KfypqKBQ7sY_6lQrRFT?usp=sharing',
-    perPage: 24 // foto mostrate prima di "Mostra altre"
+    maxMessageLength: 600, // come MAX_CARATTERI_PENSIERO nell'Apps Script
+    maxCaptionLength: 120, // dedica della polaroid, come MAX_CARATTERI_DEDICA nell'Apps Script
+    // Spunti del pulsante "Suggerimento": la domanda e l'inizio di frase che si può inserire.
+    prompts: [
+      { domanda: 'Qual è il ricordo più bello che avete con gli sposi?', inizio: 'Ricordo ancora quando ' },
+      { domanda: 'Cosa augurate loro per la vita insieme?', inizio: 'Vi auguro ' },
+      { domanda: 'Come vi siete conosciuti, voi e gli sposi?', inizio: 'Ci siamo conosciuti ' },
+      { domanda: 'Un consiglio per un matrimonio felice?', inizio: 'Il mio consiglio è ' },
+      { domanda: 'Cosa vi piace di più di loro come coppia?', inizio: 'Di voi due amo ' },
+      { domanda: 'Un momento di oggi che non dimenticherete?', inizio: 'Di questa giornata porterò con me ' },
+      { domanda: 'Dove li immaginate tra dieci anni?', inizio: 'Tra dieci anni vi immagino ' },
+      { domanda: 'Una canzone che vi fa pensare a loro?', inizio: 'Quando sento ' },
+      { domanda: 'Una parola per descrivere gli sposi?', inizio: 'Se dovessi descrivervi con una parola direi ' },
+      { domanda: 'Cosa vorreste dire loro oggi, semplicemente?', inizio: 'Grazie per ' }
+    ],
+    uploadUrl: env.VITE_PHOTOS_UPLOAD_URL || '',
+    perPage: 25 // foto chieste al server per volta ("Carica altre"); compaiono a gruppi di perPage/5
   },
 
   gift: {
-    holder: 'Lucia Comandini',
-    iban: 'IT98A0306924020100000003728'
+    holder: env.VITE_GIFT_HOLDER || '',
+    iban: env.VITE_GIFT_IBAN || ''
   }
 }

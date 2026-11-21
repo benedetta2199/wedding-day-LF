@@ -24,7 +24,7 @@ const { copied, copy } = useClipboard()
         
         <div class="gift-divider" aria-hidden="true"><span>♡</span></div>
 
-                <div class="bank">
+        <div v-if="gift.iban" class="bank">
           <p class="gift-note">Per chi preferisse lasciarci un pensiero con un bonifico</p>
           <span class="bank-label">Intestatario</span>
           <div class="bank-holder">{{ gift.holder }}</div>
